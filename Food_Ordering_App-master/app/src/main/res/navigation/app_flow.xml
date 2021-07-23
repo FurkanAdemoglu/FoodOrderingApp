@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_flow"
+    app:startDestination="@id/fragmentListRestaurant">
+
+    <fragment
+        android:id="@+id/fragmentListRestaurant"
+        tools:layout="@layout/fragment_list_restaurant"
+        android:name="com.pilekumatlar.foodorderingapp.fragments.lists.FragmentListRestaurant"
+        android:label="FragmentListRestaurant" />
+</navigation>
