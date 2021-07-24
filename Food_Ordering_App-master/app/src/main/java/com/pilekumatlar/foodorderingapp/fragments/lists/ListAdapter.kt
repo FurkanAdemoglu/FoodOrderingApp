@@ -9,45 +9,43 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pilekumatlar.foodorderingapp.R
+import com.pilekumatlar.foodorderingapp.databinding.ItemRestaurantsBinding
 import com.pilekumatlar.foodorderingapp.models.Restaurant
+import com.pilekumatlar.foodorderingapp.models.restaurants
 
 class ListAdapter:RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
-    private var list=ArrayList<Restaurant>()
+    //private var list=ArrayList<Restaurant>()
+    private var listTwo=ArrayList<restaurants>()
     private var listener:IRestaurantOnClickListener?=null
 
-    class ListViewHolder(val view: View):RecyclerView.ViewHolder(view){
-
-        val nameTextView=view.findViewById<TextView>(R.id.nameTextView)
-        //val avatarImageView=view.findViewById<ImageView>(R.id.avatarImageView)
-        val locationTextView=view.findViewById<TextView>(R.id.locationTextView)
-        val containerCardView=view.findViewById<CardView>(R.id.containerCardView)
-
-        fun bind(restaurant: Restaurant,listener: IRestaurantOnClickListener?){
-            nameTextView.text=restaurant.name
-            locationTextView.text=restaurant.location
-            containerCardView.setOnClickListener { listener?.onClick(restaurant)}
-          //  Glide.with(view.context).load(restaurant.imageUrl).into(avatarImageView)
-
+    class ListViewHolder(val binding:ItemRestaurantsBinding):RecyclerView.ViewHolder(binding.root){
+        fun bind(restaurants: restaurants,listener: IRestaurantOnClickListener?){
+            binding.nameTextView.text=restaurants.restaurantName
+            binding.locationTextView.text=restaurants.restaurantLocation
+            binding.containerCardView.setOnClickListener { listener?.onClick(restaurants)}
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_restaurants,parent,false)
-        return ListViewHolder(view)
+        return ListViewHolder(ItemRestaurantsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        var item=this.list[position]
+        var item=this.listTwo[position]
         holder.bind(item,listener)
     }
 
-    override fun getItemCount(): Int =list.size
+    override fun getItemCount(): Int =listTwo.size
 
-    fun setRestaurantData(list:ArrayList<Restaurant>){
+   /* fun setRestaurantData(list:ArrayList<Restaurant>){
         this.list=list
+        notifyDataSetChanged()
+    }*/
+
+    fun setRestaurantDataTwo(list:ArrayList<restaurants>){
+        this.listTwo=list
         notifyDataSetChanged()
     }
     fun setRestaurantOnClickListener(listener:IRestaurantOnClickListener){
         this.listener=listener
     }
-
 }
